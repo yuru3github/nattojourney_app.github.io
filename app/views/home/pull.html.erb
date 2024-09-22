@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/map"><img class="logo" src="/nattojourney.png" alt="nattojourney"></a>
+            <ul class="main-nav">
+                <li><%= link_to("地図", "/map") %></li>
+                <li><%= link_to("一覧", "/adress") %></li>
+                <li><%= link_to("診断", "/matching") %></li>
+                <% if @current_user %>
+                    <li><%= link_to(@current_user.name, "/users/#{@current_user.id}") %></li>
+                <% else %>
+                    <li><%= link_to("マイページ", "/users/:id") %></li>
+                <% end %>
+                <li><%= link_to("レシピ", "/recipe") %></li>
+                <li><%= link_to("参考", "/pull") %></li>
+                <% if session[:user_id] %>
+                    <li><%= link_to("ログアウト", "/logout") %></li>
+                <% else %>
+                    <li><%= link_to("新規登録", "/signup") %></li>
+                    <li><%= link_to("ログイン", "/login") %></li>
+                <% end %>
+            </ul>
+        </header>
+        <div class="pull">
+            <div>
+                <h2>協賛</h2>
+                <ul>
+                    <li><p>全国納豆協同組合連合会</p><a href="https://www.natto.or.jp/index.php" target="_blank" rel="noopener noreferrer">https://www.natto.or.jp/index.php</a></li>
+                    <li><p>納豆Wiki</p><a href="https://seesaawiki.jp/w/taiji141/" target="_blank" rel="noopener noreferrer">https://seesaawiki.jp/w/taiji141/</a></li>
+                    <li><p>e-natto.com</p><a href="https://e-natto.com/" target="_blank" rel="noopener noreferrer">https://e-natto.com/</a></li>
+                    <li><p>デイリーポータルZ</p><a href="https://dailyportalz.jp/selection/natto-matome" target="_blank" rel="noopener noreferrer">https://dailyportalz.jp/selection/natto-matome</a></li>
+                </ul>
+            </div>
+            <div class="border">
+                <h2>引用</h2>
+                <ul>
+                    <li><p>全国納豆協同組合連合会</p><a href="https://www.natto.or.jp/index.php" target="_blank" rel="noopener noreferrer">https://www.natto.or.jp/index.php</a></li>
+                    <li><p>納豆Wiki</p><a href="https://seesaawiki.jp/w/taiji141/" target="_blank" rel="noopener noreferrer">https://seesaawiki.jp/w/taiji141/</a></li>
+                    <li><p>e-natto.com</p><a href="https://e-natto.com/" target="_blank" rel="noopener noreferrer">https://e-natto.com/</a></li>
+                    <li><p>デイリーポータルZ</p><a href="https://dailyportalz.jp/selection/natto-matome" target="_blank" rel="noopener noreferrer">https://dailyportalz.jp/selection/natto-matome</a></li>
+                </ul>
+            </div>
+            <div class="border">
+                <h2>参考</h2>
+                <ul>
+                    <li><p>全国納豆協同組合連合会</p><a href="https://www.natto.or.jp/index.php" target="_blank" rel="noopener noreferrer">https://www.natto.or.jp/index.php</a></li>
+                    <li><p>納豆Wiki</p><a href="https://seesaawiki.jp/w/taiji141/" target="_blank" rel="noopener noreferrer">https://seesaawiki.jp/w/taiji141/</a></li>
+                    <li><p>e-natto.com</p><a href="https://e-natto.com/" target="_blank" rel="noopener noreferrer">https://e-natto.com/</a></li>
+                    <li><p>デイリーポータルZ</p><a href="https://dailyportalz.jp/selection/natto-matome" target="_blank" rel="noopener noreferrer">https://dailyportalz.jp/selection/natto-matome</a></li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

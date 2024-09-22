@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/map"><img class="logo" src="/nattojourney.png" alt="nattojourney"></a>
+            <ul class="main-nav">
+                <li><%= link_to("地図", "/map") %></li>
+                <li><%= link_to("一覧", "/adress") %></li>
+                <li><%= link_to("診断", "/matching") %></li>
+                <% if @current_user %>
+                    <li><%= link_to(@current_user.name, "/users/#{@current_user.id}") %></li>
+                <% else %>
+                    <li><%= link_to("マイページ", "/users/#{user.id}") %></li>
+                <% end %>
+                <li><%= link_to("レシピ", "/recipe") %></li>
+                <li><%= link_to("参考", "/pull") %></li>
+                <% if session[:user_id] %>
+                    <li><%= link_to("ログアウト", "/logout") %></li>
+                <% else %>
+                    <li><%= link_to("新規登録", "/signup") %></li>
+                    <li><%= link_to("ログイン", "/login") %></li>
+                <% end %>
+            </ul>
+        </header>
+        <% if flash[:notice] %>
+            <div class="flash">
+                <%= flash[:notice] %>
+            </div>
+        <% end %>
+        <div class="mypage">
+            <div class="user">
+                <img src="<%= "/#{@user.image_name}" %>" alt="ユーザー画像">
+                <h2>ユーザー名</h2>
+                <%= link_to("プロフィール編集", "/users/#{@user.id}/edit") %>
+            </div>
+            <div class="nattobox">
+                <h3>たべた納豆</h3>
+                <p>各画像クリックで詳細ページへ！</p>
+                <br>
+                <a class="button" href="/new">登録</a>
+                <div class="discript">
+                    <p>「登録」ボタンまたは「なっ豆知識カードをゲットする」ボタンから、たべた納豆を登録しよう！</p>
+                    <p>一覧ページにある納豆を登録すると、納豆の豆知識とサイト制作者オリジナル納豆イラストつきの「なっ豆知識カード」をゲットできるよ ☆</p>
+                    <p>レビューは詳細ページに掲載されるよ</p>
+                    <p>みんなでレビューを共有して、あらたな納豆の魅力にであおう！</p>
+                </div>
+                <% @user.reviews.each do |review| %>
+                    <%= link_to(<%= <img src="<%= "/#{review.image}" %>"> %>, "/index") %>
+                <% end %>
+                <ul>
+                    <li>
+                        <a href="/index"><img src="/fuji.jpeg" alt="納豆画像"></a>
+                    </li>
+                    <li>
+                        <a href="/index"><img src="/gin.jpeg" alt="納豆画像"></a>
+                    </li>
+                    <li>
+                        <a href="/index"><img src="/hana.jpeg" alt="納豆画像"></a>
+                    </li>
+                    <li>
+                        <a href="/index"><img src="/hon.jpeg" alt="納豆画像"></a>
+                    </li>
+                    <li>
+                        <a href="/index"><img src="/ise.jpeg" alt="納豆画像"></a>
+                    </li>
+                    <li>
+                        <a href="/index"><img src="/kai.jpeg" alt="納豆画像"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="cardbox">
+                <h3>ゲットしたなっ豆知識カード</h3>
+                <p>各カードクリックでなっ豆知識をみかえせるよ</p>
+                <br>
+                <a class="button" href="/new">なっ豆知識カードをゲットする</a>
+                <ul>
+                    <li>
+                        <a href="/card"><img src="/card.png" alt="なっ豆知識カードの裏"></a>
+                    </li>
+                    <li>
+                        <a href="/card"><img src="/card.png" alt="なっ豆知識カードの裏"></a>
+                    </li>
+                    <li>
+                        <a href="/card"><img src="/card.png" alt="なっ豆知識カードの裏"></a>
+                    </li>
+                    <li>
+                        <a href="/card"><img src="/card.png" alt="なっ豆知識カードの裏"></a>
+                    </li>
+                    <li>
+                        <a href="/card"><img src="/card.png" alt="なっ豆知識カードの裏"></a>
+                    </li>
+                    <li>
+                        <a href="/card"><img src="/card.png" alt="なっ豆知識カードの裏"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="review">
+            <h2>たべた納豆編集</h2>
+            <% @review.errors.full_messages.each do |message| %>
+                <div class="form-error">
+                    <%= message %>
+                </div>
+            <% end %>
+            <%= form_tag("/reviews/#{@review.id}/update") do %>
+                <div>
+                    <label>納豆の名前</label>
+                    <textarea class="inputname" name="name"><%= @review.name %></textarea>
+                </div>
+                <div>
+                    <label>レビュー（味、におい、ねばりなど）</label>
+                    <textarea class="inputreview" name="content"><%= @review.content %></textarea>
+                </div>
+                <input type="submit" class="button" value="更新">
+            <% end %>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/map"><img class="logo" src="/nattojourney.png" alt="nattojourney"></a>
+            <ul class="main-nav">
+                <li><a href="/map">地図</a></li>
+                <li><a href="/adress">一覧</a></li>
+                <li><a href="/matching">診断</a></li>
+                <li><a href="/mypage">マイページ</a></li>
+                <li><a href="/recipe">レシピ</a></li>
+                <li><a href="/pull">参考</a></li>
+            </ul>
+        </header>
+        <% if flash[:notice] %>
+            <div class="flash">
+                <%= flash[:notice] %>
+            </div>
+        <% end %>
+        <div class="index-show">
+            <h2>納豆詳細</h2>
+            <br id="natto1">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>くま納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>道南平塚食品株式会社</p>
+                        <img src="/kuma.jpeg" alt="くま納豆">
+                    </div>
+                    <div class="right">
+                        <h3>納豆と相性が良い「磨かれた水」とかつお・昆布だしを使った特製のたれと納豆を混ぜれば、ご飯との相性ピッタリ！</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：北海道</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：極小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：〜100円（40g×1パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://nattou.co.jp/" target="_blank" rel="noopener noreferrer">https://nattou.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://nattou.co.jp/n/%e3%81%8f%e3%81%be%e7%b4%8d%e8%b1%86%ef%bc%88%e3%82%ab%e3%83%83%e3%83%97%ef%bc%89-2/" target="_blank" rel="noopener noreferrer">https://nattou.co.jp/n/%e3%81%8f%e3%81%be%e7%b4%8d%e8%b1%86%ef%bc%88%e3%82%ab%e3%83%83%e3%83%97%ef%bc%89-2/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　パッケージがかわいい。タレもおいしくて、小粒の豆がつるつるしている。たべやすい！</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto2">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>豆の文志郎 鹿角納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>道南平塚食品株式会社</p>
+                        <img src="/sika.jpeg" alt="豆の文志郎 鹿角納豆">
+                    </div>
+                    <div class="right">
+                        <h3>指定農園産の上質な大豆のみを使用し発酵に鹿角霊芝(ろっかくれいし)を活用した独自製法で豊かなコクとまろやかさを実現した文志郎の「最高級」納豆</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：北海道</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：500〜1000円（50g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://nattou.co.jp/" target="_blank" rel="noopener noreferrer">https://nattou.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://nattou.co.jp/n/%e8%b1%86%e3%81%ae%e6%96%87%e5%bf%97%e9%83%8e-%e9%b9%bf%e8%a7%92%e7%b4%8d%e8%b1%86/" target="_blank" rel="noopener noreferrer">https://nattou.co.jp/n/%e8%b1%86%e3%81%ae%e6%96%87%e5%bf%97%e9%83%8e-%e9%b9%bf%e8%a7%92%e7%b4%8d%e8%b1%86/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　いれものがすごい…！おにぎりをつつむ竹？のつつみみたい。すごくごはんにあいそうな大粒納豆！たきたてのごはんにのせたい。→たまごかけごはんにのせた優勝。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto3">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>オーツ麦入り国産大豆ひきわり納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>太子食品工業株式会社</p>
+                        <img src="/otu.jpeg" alt="オーツ麦入り国産大豆ひきわり納豆">
+                    </div>
+                    <div class="right">
+                        <h3>食物繊維が豊富なオーツ麦を納豆に加えました。国産大豆使用のやわらかなひきわり納豆にぷちぷち食感が加わり、食べて楽しく、体に嬉しい納豆です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：青森</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：ひきわり</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（40g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.taishi-food.co.jp/" target="_blank" rel="noopener noreferrer">https://www.taishi-food.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://www.taishi-shop.jp/SHOP/115440.html" target="_blank" rel="noopener noreferrer">https://www.taishi-shop.jp/SHOP/115440.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto4">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>すずかおり</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>有限会社 高畠納豆</p>
+                        <img src="/suzu.jpeg" alt="すずかおり">
+                    </div>
+                    <div class="right">
+                        <h3>山形県産小粒大豆を使用した納豆 化学調味料無添加のタレカラシ付き</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：山形</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（40g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.dewa.or.jp/tnatto/default.htm" target="_blank" rel="noopener noreferrer">https://www.dewa.or.jp/tnatto/default.htm</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://store.shopping.yahoo.co.jp/tnatto/suzu-1.html" target="_blank" rel="noopener noreferrer">https://store.shopping.yahoo.co.jp/tnatto/suzu-1.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　納豆らしいちからづよさとあじわいはありつつ、上品な印象も。パッケージのすずやかさ、いい。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto5">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>川口納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>有限会社 川口納豆</p>
+                        <img src="/kawa.jpeg" alt="川口納豆">
+                    </div>
+                    <div class="right">
+                        <h3>「たれ」や「からし」を入れると納豆本来の味わいを感じることができなくなるため、お客様の好みにおまかせするため「あえて」つけておりません。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：宮城</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（90g×1パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.kawaguchi-natto.co.jp/" target="_blank" rel="noopener noreferrer">https://www.kawaguchi-natto.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://k-natto.shop-pro.jp/?pid=111580247" target="_blank" rel="noopener noreferrer">https://k-natto.shop-pro.jp/?pid=111580247</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　しっかりした豆と納豆のうまみ。なじみやすくもある、王道の味。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto6">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>おかめ納豆極小粒ミニ</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>タカノフーズ株式会社</p>
+                        <img src="/okame.jpeg" alt="おかめ納豆極小粒ミニ">
+                    </div>
+                    <div class="right">
+                        <h3>1980年代に発売されたロングセラー商品。独自の厳しい品質管理のもと、しっかり発酵することで糸と旨味を引き出したオーソドックスな味わいの納豆です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：茨城</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：極小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：〜100円（50g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.takanofoods.co.jp/" target="_blank" rel="noopener noreferrer">https://www.takanofoods.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://sm.rakuten.co.jp/item/4901160010143" target="_blank" rel="noopener noreferrer">https://sm.rakuten.co.jp/item/4901160010143</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　ド定番。各地にご当地おかめがある模様。九州版はあまめのタレとやわらかい豆だが、こちらは塩辛いタレとつるっとした極小粒。制作者は九州版がすきです。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto7">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>天狗納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>株式会社 笹沼五郎商店</p>
+                        <img src="/ten.jpeg" alt="天狗納豆">
+                    </div>
+                    <div class="right">
+                        <h3>粒が特に小さいため、粘りを出す納豆の表面積が全体的に多くなり、かき混ぜると、全体に強い粘りが出るのが特徴です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：茨城</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：極小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（70g×1本）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="http://www.tengunatto.com/" target="_blank" rel="noopener noreferrer">http://www.tengunatto.com/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="http://www.tengunatto.com/g-wara_goku1.html" target="_blank" rel="noopener noreferrer">http://www.tengunatto.com/g-wara_goku1.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　ワラから納豆をとりだすのは大変だけど、アミューズメント感は満点。ぎゅっとつまった納豆はほぐしにくいけど、そのかたまりごとたべるとあらおいしい！かため◎</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto8">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>しもにた大粒</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>有限会社 下仁田納豆</p>
+                        <img src="/simo.jpeg" alt="しもにた大粒">
+                    </div>
+                    <div class="right">
+                        <h3>昭和38年創業以来、群馬県産赤松の経木（きょうぎ）を使用して、国産大豆を炭火発酵にて一つ一つ丁寧に仕上げております。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：群馬</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：300〜500円（80g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://shimonita-natto.shop-pro.jp/" target="_blank" rel="noopener noreferrer">https://shimonita-natto.shop-pro.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://shimonita-natto.shop-pro.jp/?pid=152813278&_ga=2.77083925.1696903899.1720867379-1127944108.1720093834&_gl=1*3dkby0*_ga*MTEyNzk0NDEwOC4xNzIwMDkzODM0*_ga_11SFHKS8EM*MTcyMDg2NzM3OC40LjEuMTcyMDg2ODM4NC4wLjAuMA.." target="_blank" rel="noopener noreferrer">https://shimonita-natto.shop-pro.jp/?pid=152813278&_ga=2.77083925.1696903899.1720867379-1127944108.1720093834&_gl=1*3dkby0*_ga*MTEyNzk0NDEwOC4xNzIwMDkzODM0*_ga_11SFHKS8EM*MTcyMDg2NzM3OC40LjEuMTcyMDg2ODM4NC4wLjAuMA..</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　すき暫定一位かも…! しっかりとした大粒で、かためだけど芯がのこっている感じではなく、絶技なかたさ。タレがなかったから塩のみでたべたのですが、なにもかけずともおいしい素材の味がひきたった。大豆が糸をひきましたよ、くらいの豆感だが、口にひろがる芳醇な発酵臭はちゃんと納豆感。ボリュームもあり、1パックで満足な逸品。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto9">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>ナットウジャーキー木桶しょうゆ味</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>Shonan Soy Studio Inc.</p>
+                        <img src="/zyaki.jpeg" alt="ナットウジャーキー木桶しょうゆ味">
+                    </div>
+                    <div class="right">
+                        <h3>納豆の旨味はそのままに、オイルフリーの低温乾燥・無添加・植物性の設計で実現したフィンガーフードです。さっぱりラガー系ビールや焼酎、日本酒との相性抜群。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：神奈川</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒？</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：500〜1000円（80g×1袋）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://soyffee.thebase.in/" target="_blank" rel="noopener noreferrer">https://soyffee.thebase.in/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://soyffee.thebase.in/items/64262201" target="_blank" rel="noopener noreferrer">https://soyffee.thebase.in/items/64262201</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto10">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>大粒納豆 吟醸</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>株式会社大力納豆</p>
+                        <img src="/gin.jpeg" alt="大粒納豆 吟醸">
+                    </div>
+                    <div class="right">
+                        <h3>北海道産の希少な鶴の子大豆を100%使用しました。大豆の希少性もあり1週間に1度の生産でございます。完全予約限定製造品となっております。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：新潟</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（45g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.dairikinatto.co.jp/index.html" target="_blank" rel="noopener noreferrer">https://www.dairikinatto.co.jp/index.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://www.dairikinatto.co.jp/contact/contact.html" target="_blank" rel="noopener noreferrer">https://www.dairikinatto.co.jp/contact/contact.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto11">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>富士納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>富士納豆製造所</p>
+                        <img src="/fuji.jpeg" alt="富士納豆">
+                    </div>
+                    <div class="right">
+                        <h3>富士山麓の水で作った、幻の手作り納豆です。国指定重要文化財星野家謹製、手作り故の数量限定生産品です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：山梨</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：中粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：2000〜3000円（100g×8パック+50g×3パック×2セット）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://fujinatto.jp/" target="_blank" rel="noopener noreferrer">https://fujinatto.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="http://fujinatto.shop-pro.jp/?pid=80164245" target="_blank" rel="noopener noreferrer">http://fujinatto.shop-pro.jp/?pid=80164245</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto12">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>甲斐駒</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>株式会社せんだい（店舗名‥納豆工房せんだい屋）</p>
+                        <img src="/kai.jpeg" alt="甲斐駒">
+                    </div>
+                    <div class="right">
+                        <h3>職人の手作業でひとつひとつ丁寧に松の経木に包んで仕上げました。豆の甘味、経木の上品な香りを堪能できる大粒・小粒セットです。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：山梨</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒、小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：300〜500円（70g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.sendainatto.jp/" target="_blank" rel="noopener noreferrer">https://www.sendainatto.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://www.sendainatto.jp/shop/products/detail/55" target="_blank" rel="noopener noreferrer">https://www.sendainatto.jp/shop/products/detail/55</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto13">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>金のつぶ パキッ！とたれ とろっ豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>株式会社 Mizkan</p>
+                        <img src="/toro.jpeg" alt="金のつぶ パキッ！とたれ とろっ豆">
+                    </div>
+                    <div class="right">
+                        <h3>ふたを切り離しパキッ！と割るだけでまろやかなたれをかけることができる、とろけるくらいやわらかい食感とふわふわの糸引きの納豆なので、楽しく納豆を続けることができます。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：愛知</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：極小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（45g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.mizkan.co.jp/natto/" target="_blank" rel="noopener noreferrer">https://www.mizkan.co.jp/natto/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://store.shopping.yahoo.co.jp/promart-no1/reizo-sozai43.html" target="_blank" rel="noopener noreferrer">https://store.shopping.yahoo.co.jp/promart-no1/reizo-sozai43.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　納豆のシートがないので、手に納豆がつかないのがたすかる。あわだちつよく、やわらかい。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto14">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>やまなっとう</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>株式会社金城納豆食品</p>
+                        <img src="/yama.jpeg" alt="やまなっとう">
+                    </div>
+                    <div class="right">
+                        <h3>空飛ぶ微生物ハンター牧輝弥教授（近畿大学）と金城納豆食品が共同開発しました。立山の積雪7メートルに保存されていた菌でつくりました。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：石川</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（40g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.kinjyo710.com/" target="_blank" rel="noopener noreferrer">https://www.kinjyo710.com/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://www.kinjyo710.com/product-page/%E3%82%84%E3%81%BE%E3%81%AA%E3%81%A3%E3%81%A8%E3%81%86" target="_blank" rel="noopener noreferrer">https://www.kinjyo710.com/product-page/%E3%82%84%E3%81%BE%E3%81%AA%E3%81%A3%E3%81%A8%E3%81%86</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　意外と豆がかため！でもタレがあまめでたべやすいイメージ。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto15">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>お伊勢まいり納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>奥野食品株式会社（店舗名‥まちの駅たぬみせ納豆工房）</p>
+                        <img src="/ise.jpeg" alt="お伊勢まいり納豆">
+                    </div>
+                    <div class="right">
+                        <h3>メリハリのきいたコクと豊かな香りは昔ながらの製造方法を踏襲した大粒納豆の決定版です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：三重</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：300〜500円（100g×1藁（3食分））</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="http://www.nattouya.com/" target="_blank" rel="noopener noreferrer">http://www.nattouya.com/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://item.rakuten.co.jp/tanumise/10000188/#pagetop" target="_blank" rel="noopener noreferrer">https://item.rakuten.co.jp/tanumise/10000188/#pagetop</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto16">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>SELECTシリーズ大粒玉ねぎ</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>小金屋食品株式会社（店舗名‥納豆BAR小金庵）</p>
+                        <img src="/tama.jpeg" alt="SELECTシリーズ大粒玉ねぎ">
+                    </div>
+                    <div class="right">
+                        <h3>宮城県産大粒大豆に化学調味料不使用の白しょうゆたれ8gと北海道産のじっくりとソテーした玉ねぎがセットされています。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：大阪</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100〜300円（70g×1パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://710-bar.co.jp/" target="_blank" rel="noopener noreferrer">https://710-bar.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://710-bar.co.jp/SHOP/o-tamanegiNew.html" target="_blank" rel="noopener noreferrer">https://710-bar.co.jp/SHOP/o-tamanegiNew.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto17">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>鴨川納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>藤原食品</p>
+                        <img src="/kamo.jpeg" alt="鴨川納豆">
+                    </div>
+                    <div class="right">
+                        <h3>納豆嫌いだった社長が作る 京納豆「藤原食品」。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：京都</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：〜100円（70g×1パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.kirario.jp/content/story/144_sp.html" target="_blank" rel="noopener noreferrer">https://www.kirario.jp/content/story/144_sp.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://shokusai.stores.jp/items/62f3688ab821561f32fb98d8" target="_blank" rel="noopener noreferrer">https://shokusai.stores.jp/items/62f3688ab821561f32fb98d8</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto18">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>【特選納豆】NATTO ピスタチオ</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>有限会社相沢食産</p>
+                        <img src="/pis.jpeg" alt="【特選納豆】NATTO ピスタチオ">
+                    </div>
+                    <div class="right">
+                        <h3>ほんのり甘いコク、ねっとり食感が納豆と相性ぴったり。塩でさっぱりと。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：兵庫</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：小粒？</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：500〜1000円（70g×1パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://natto.official.ec/" target="_blank" rel="noopener noreferrer">https://natto.official.ec/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://natto.official.ec/items/86950434" target="_blank" rel="noopener noreferrer">https://natto.official.ec/items/86950434</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto19">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>発酵柚子こうじみそだれ小粒納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>蒜山食品加工株式会社</p>
+                        <img src="/yuzu.jpeg" alt="発酵柚子こうじみそだれ小粒納豆">
+                    </div>
+                    <div class="right">
+                        <h3>発酵・熟成した、まろやかな米こうじみそに柚子を加えて、爽やかな口当たりに仕上げた職人手づくりのたれが、納豆の旨みを十分に引出した食欲をそそる逸品です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：岡山</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100円〜300円（45g×2パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://hirusyoku.com/index.html" target="_blank" rel="noopener noreferrer">https://hirusyoku.com/index.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://hirusyoku.com/contact.html" target="_blank" rel="noopener noreferrer">https://hirusyoku.com/contact.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto20">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>なっとう玉</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>有限会社ハス商会（店舗名‥四国 阿波 はすや）</p>
+                        <img src="/natama.jpeg" alt="なっとう玉">
+                    </div>
+                    <div class="right">
+                        <h3>ポリポリおやつ感覚で食べられる乾燥納豆♪生きた納豆菌で体の中から健康を作るから成長期のお子様を持つ方に大人気。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：徳島</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：小粒？</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：2000円〜3000円（150g×1袋）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.has710.com/" target="_blank" rel="noopener noreferrer">https://www.has710.com/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://www.has710.com/view/item/000000000033" target="_blank" rel="noopener noreferrer">https://www.has710.com/view/item/000000000033</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto21">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>元気納豆 九州本仕込み</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>マルキン食品株式会社</p>
+                        <img src="/hon.jpeg" alt="元気納豆 九州本仕込み">
+                    </div>
+                    <div class="right">
+                        <h3>九州の甘口のしょうゆをベースに、九州人の嗜好にあった甘口の「あまかたれ」付。納豆の苦手な方にも食べやすい納豆です。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：熊本</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100円〜300円（40g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.marukinfoods.co.jp/" target="_blank" rel="noopener noreferrer">https://www.marukinfoods.co.jp/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://mkdirect.stores.jp/items/5cd8c4f1c843ce0c744abff9" target="_blank" rel="noopener noreferrer">https://mkdirect.stores.jp/items/5cd8c4f1c843ce0c744abff9</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　ザ・納豆。親しみもあり、ちょうどいい。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    
+                </div>
+            </div>
+            <br id="natto22">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>パワーキッズ</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>株式会社丸美屋</p>
+                        <img src="/kizzu.jpeg" alt="パワーキッズ">
+                    </div>
+                    <div class="right">
+                        <h3>くせのないあっさりとした風味と、柔らかな豆が特徴の納豆です。お子様にぴったりのカツオ風味甘口とろみたれ付。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：熊本</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：中粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100円〜300円（30g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.marumiya-g.co.jp/index.php" target="_blank" rel="noopener noreferrer">https://www.marumiya-g.co.jp/index.php</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://musouan-shop.jp/view/item/000000000035?category_page_id=ct-natto" target="_blank" rel="noopener noreferrer">https://musouan-shop.jp/view/item/000000000035?category_page_id=ct-natto</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　はじめの納豆。当方、小学校ででていた。パッケージがかわいい。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto23">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>わらづつみ納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>有限会社野田食品</p>
+                        <img src="/wara.jpeg" alt="わらづつみ納豆">
+                    </div>
+                    <div class="right">
+                        <h3>昔ながらの「わらづつみ納豆」をはじめ、ファン続出の「餅」など手作りにこだわった食品製造・卸売業の「野田食品」。長年変わらない手法を守り続け、商品力の高さにリピーターも多い。</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：熊本</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：円〜円（）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://allmifune.com/dinosaur-committee/item/38-noda.html" target="_blank" rel="noopener noreferrer">https://allmifune.com/dinosaur-committee/item/38-noda.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://allmifune.com/dinosaur-committee/item/38-noda.html" target="_blank" rel="noopener noreferrer">https://allmifune.com/dinosaur-committee/item/38-noda.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto24">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>国産 くろめ納豆</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>製造：原田製油有限会社、販売：二豊フーズ株式会社</p>
+                        <img src="/kuro.jpeg" alt="国産 くろめ納豆">
+                    </div>
+                    <div class="right">
+                        <h3>第21回全国納豆鑑評会優秀賞受賞! 昆布の仲間「くろめ」のねばりと納豆でWのねばり</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：大分</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：大粒、中粒</>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100円〜300円（40g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="https://www.nihofoods.com/" target="_blank" rel="noopener noreferrer">https://www.nihofoods.com/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://www.tokiwa-portal.com/shop/g/g4976772111878/" target="_blank" rel="noopener noreferrer">https://www.tokiwa-portal.com/shop/g/g4976772111878/</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　くろめの海苔感、ねばつぶ感が納豆を味変させておいしい。ごはんとあう。</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+            <br id="natto25">
+            <div class="item-show">
+                <a href="#" onclick="window.history.back(); return false;">◀︎ 戻る</a>
+                <h2>はなまる納豆極小粒</h2>
+                <div class="left-right">
+                    <div class="left">
+                        <p>沖フーズ株式会社</p>
+                        <img src="/hana.jpeg" alt="はなまる納豆極小粒">
+                    </div>
+                    <div class="right">
+                        <h3>子供が喜ぶパッケージ</h3>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業本拠地：沖縄</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">粒の大きさ：極小粒</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">価格帯：100円〜300円（40g×3パック）</p>
+                        <p><img src="/natto-mini2.png" alt="アイコン">企業または関連サイト</p>
+                        <a href="http://saien-ltd.co.jp/company/index2.html" target="_blank" rel="noopener noreferrer">http://saien-ltd.co.jp/company/index2.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">おとりよせサイトまたはお問い合わせ</p>
+                        <a href="https://shop.aeon.com/netsuper/10000000030560/100000000305604580363471090.html" target="_blank" rel="noopener noreferrer">https://shop.aeon.com/netsuper/10000000030560/100000000305604580363471090.html</a>
+                        <p><img src="/natto-mini2.png" alt="アイコン">nattojourney制作者レビュー</p>
+                        <p>　</p>
+                    </div>
+                </div>
+                <div class="review-show">
+                    <p>☆ たべた人のレビュー ☆</p>
+                    <img src="<%= "/user_images/#{@reviews.user.image_name}" %>">
+                    <%= @reviews.user.name %>
+                    <%= link_to(@reviews.content, "/reviews/#{review.id}") %>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

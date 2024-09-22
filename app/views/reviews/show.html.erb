@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="review">
+            <div class="review-user-name" >
+                <img src="<%= "/user_images/#{@user.image_name}" %>">
+                <%= link_to(@user.name, "users/#{@user.id}") %>
+            <h2>たべた納豆</h2>
+            <%= form_tag("/create") do %>
+                <div>
+                    <label>納豆の名前</label>
+                    <%= @review.name %>
+                </div>
+                <div>
+                    <label>レビュー（味、におい、ねばりなど）</label>
+                    <%= @review.content %>
+                </div>
+            <% end %>
+            <% if @review.user_id == @current_user.id %>
+                <%= link_to("編集","/reviews/#{@review.id}/edit") %>
+                <%= link_to("削除","/reviews/#{@review.id}/destroy",{method: "post"}) %>
+            <% end %>
+            <a href="/index">納豆詳細にもどる</a>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

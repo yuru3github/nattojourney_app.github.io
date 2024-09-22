@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="login">
+            <h3>ログイン</h3>
+            <% if @error_message %>
+                <div class="form-error">
+                  <%= @error_message %>
+                </div>
+            <% end %>
+            <%= form_tag("/login") do %>
+                <div>
+                    <label>ユーザー名</label>
+                    <textarea class="inputname" name="name"></textarea>
+                </div>
+                <div>
+                    <label>パスワード</label>
+                    <textarea type="password" class="inputpassword" name="password"></textarea>
+                </div>
+                <input type="submit" class="button" value="送信">
+            <% end %>
+            <a href="/map">ホームにもどる</a>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

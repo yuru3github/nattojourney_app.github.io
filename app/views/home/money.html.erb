@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>nattojourney</title>
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+        <link rel="stylesheet" href="scss/stylesheet.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <a href="/map"><img class="logo" src="/nattojourney.png" alt="nattojourney"></a>
+            <ul class="main-nav">
+                <li><%= link_to("地図", "/map") %></li>
+                <li><%= link_to("一覧", "/adress") %></li>
+                <li><%= link_to("診断", "/matching") %></li>
+                <% if @current_user %>
+                    <li><%= link_to(@current_user.name, "/users/#{@current_user.id}") %></li>
+                <% else %>
+                    <li><%= link_to("マイページ", "/users/:id") %></li>
+                <% end %>
+                <li><%= link_to("レシピ", "/recipe") %></li>
+                <li><%= link_to("参考", "/pull") %></li>
+                <% if session[:user_id] %>
+                    <li><%= link_to("ログアウト", "/logout") %></li>
+                <% else %>
+                    <li><%= link_to("新規登録", "/signup") %></li>
+                    <li><%= link_to("ログイン", "/login") %></li>
+                <% end %>
+            </ul>
+        </header>
+        <div class="side-index">
+            <div class="side">
+                <ul class="side-nav">
+                    <li><a class="button" href="/adress">都道府県</a>
+                        <ul>
+                            <li><a class="button" href="/adress#hokkaido">北海道</a></li>
+                            <li><a class="button" href="/adress#aomori">青森</a></li>
+                            <li><a class="button" href="/adress#yamagata">山形</a></li>
+                            <li><a class="button" href="/adress#miyagi">宮城</a></li>
+                            <li><a class="button" href="/adress#ibaraki">茨城</a></li>
+                            <li><a class="button" href="/adress#gunma">群馬</a></li>
+                            <li><a class="button" href="/adress#kanagawa">神奈川</a></li>
+                            <li><a class="button" href="/adress#niigata">新潟</a></li>
+                            <li><a class="button" href="/adress#yamanashi">山梨</a></li>
+                            <li><a class="button" href="/adress#aichi">愛知</a></li>
+                            <li><a class="button" href="/adress#ishikawa">石川</a></li>
+                            <li><a class="button" href="/adress#mie">三重</a></li>
+                            <li><a class="button" href="/adress#osaka">大阪</a></li>
+                            <li><a class="button" href="/adress#kyoto">京都</a></li>
+                            <li><a class="button" href="/adress#hyogo">兵庫</a></li>
+                            <li><a class="button" href="/adress#okayama">岡山</a></li>
+                            <li><a class="button" href="/adress#tokushima">徳島</a></li>
+                            <li><a class="button" href="/adress#kumamoto">熊本</a></li>
+                            <li><a class="button" href="/adress#oita">大分</a></li>
+                            <li><a class="button" href="/adress#okinawa">沖縄</a></li>
+                        </ul>    
+                    </li>
+                    <li><a class="button" href="/size">粒の大きさ</a>
+                        <ul>
+                            <li><a class="button" href="/size#1">大粒</a></li>
+                            <li><a class="button" href="/size#2">中粒</a></li>
+                            <li><a class="button" href="/size#3">小粒</a></li>
+                            <li><a class="button" href="/size#4">極小粒</a></li>
+                            <li><a class="button" href="/size#5">ひきわり</a></li>
+                            <li><a class="button" href="/size#none">不明</a></li>
+                        </ul>    
+                    </li>
+                    <li><a class="button" href="/money">価格帯</a>
+                        <ul>
+                            <li><a class="button" href="/money#0">〜100円</a></li>
+                            <li><a class="button" href="/money#100">100円〜300円</a></li>
+                            <li><a class="button" href="/money#300">300円〜500円</a></li>
+                            <li><a class="button" href="/money#500">500円〜1000円</a></li>
+                            <li><a class="button" href="/money#1000">1000円〜2000円</a></li>
+                            <li><a class="button" href="/money#2000">2000円〜3000円</a></li>
+                            <li><a class="button" href="/money#none">不明</a></li>
+                        </ul>    
+                    </li>
+                </ul>
+            </div>
+            <div class="index">
+                <h2>価格帯ごとの納豆一覧</h2>
+                <br id="0">
+                <div class="home">
+                    <h3>〜100円</h3>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">くま納豆</h4>
+                        <p>道南平塚食品株式会社</p>
+                        <div class="content">
+                            <img src="/kuma.jpeg" alt="くま納豆">
+                            <div>
+                                <p>納豆と相性が良い「磨かれた水」とかつお・昆布だしを使った特製のたれと納豆を混ぜれば、ご飯との相性ピッタリ！</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto1") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">おかめ納豆極小粒ミニ</h4>
+                        <p>タカノフーズ株式会社</p>
+                        <div class="content">
+                            <img src="/okame.jpeg" alt="おかめ納豆極小粒ミニ">
+                            <div>
+                                <p>1980年代に発売されたロングセラー商品。独自の厳しい品質管理のもと、しっかり発酵することで糸と旨味を引き出したオーソドックスな味わいの納豆です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto6") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">鴨川納豆</h4>
+                        <p>藤原食品</p>
+                        <div class="content">
+                            <img src="/kamo.jpeg" alt="鴨川納豆">
+                            <div>
+                                <p>納豆嫌いだった社長が作る 京納豆「藤原食品」。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto17") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br id="100">
+                <div class="home">
+                    <h3>100円〜300円</h3>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">オーツ麦入り国産大豆ひきわり納豆</h4>
+                        <p>太子食品工業株式会社</p>
+                        <div class="content">
+                            <img src="/otu.jpeg" alt="オーツ麦入り国産大豆ひきわり納豆">
+                            <div>
+                                <p>食物繊維が豊富なオーツ麦を納豆に加えました。国産大豆使用のやわらかなひきわり納豆にぷちぷち食感が加わり、食べて楽しく、体に嬉しい納豆です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto3") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">すずかおり</h4>
+                        <p>有限会社 高畠納豆</p>
+                        <div class="content">
+                            <img src="/suzu.jpeg" alt="すずかおり">
+                            <div>
+                                <p>山形県産小粒大豆を使用した納豆 化学調味料無添加のタレカラシ付き</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto4") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">川口納豆</h4>
+                        <p>有限会社 川口納豆</p>
+                        <div class="content">
+                            <img src="/kawa.jpeg" alt="川口納豆">
+                            <div>
+                                <p>「たれ」や「からし」を入れると納豆本来の味わいを感じることができなくなるため、お客様の好みにおまかせするため「あえて」つけておりません。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto5") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">大粒納豆 吟醸</h4>
+                        <p>株式会社大力納豆</p>
+                        <div class="content">
+                            <img src="/gin.jpeg" alt="大粒納豆 吟醸">
+                            <div>
+                                <p>北海道産の希少な鶴の子大豆を100%使用しました。大豆の希少性もあり1週間に1度の生産でございます。完全予約限定製造品となっております。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto10") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">天狗納豆</h4>
+                        <p>株式会社 笹沼五郎商店</p>
+                        <div class="content">
+                            <img src="/ten.jpeg" alt="天狗納豆">
+                            <div>
+                                <p>粒が特に小さいため、粘りを出す納豆の表面積が全体的に多くなり、かき混ぜると、全体に強い粘りが出るのが特徴です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto7") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">金のつぶ パキッ！とたれ とろっ豆</h4>
+                        <p>株式会社 Mizkan</p>
+                        <div class="content">
+                            <img src="/toro.jpeg" alt="金のつぶ パキッ！とたれ とろっ豆">
+                            <div>
+                                <p>ふたを切り離しパキッ！と割るだけでまろやかなたれをかけることができる、とろけるくらいやわらかい食感とふわふわの糸引きの納豆なので、楽しく納豆を続けることができます。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto13") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">やまなっとう</h4>
+                        <p>株式会社金城納豆食品</p>
+                        <div class="content">
+                            <img src="/yama.jpeg" alt="やまなっとう">
+                            <div>
+                                <p>空飛ぶ微生物ハンター牧輝弥教授（近畿大学）と金城納豆食品が共同開発しました。立山の積雪7メートルに保存されていた菌でつくりました。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto14") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">SELECTシリーズ大粒玉ねぎ</h4>
+                        <p>小金屋食品株式会社（店舗名‥納豆BAR小金庵）</p>
+                        <div class="content">
+                            <img src="/tama.jpeg" alt="SELECTシリーズ大粒玉ねぎ">
+                            <div>
+                                <p>宮城県産大粒大豆に化学調味料不使用の白しょうゆたれ8gと北海道産のじっくりとソテーした玉ねぎがセットされています。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto16") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">発酵柚子こうじみそだれ小粒納豆</h4>
+                        <p>蒜山食品加工株式会社</p>
+                        <div class="content">
+                            <img src="/yuzu.jpeg" alt="発酵柚子こうじみそだれ小粒納豆">
+                            <div>
+                                <p>発酵・熟成した、まろやかな米こうじみそに柚子を加えて、爽やかな口当たりに仕上げた職人手づくりのたれが、納豆の旨みを十分に引出した食欲をそそる逸品です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto19") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">元気納豆 九州本仕込み</h4>
+                        <p>マルキン食品株式会社</p>
+                        <div class="content">
+                            <img src="/hon.jpeg" alt="元気納豆 九州本仕込み">
+                            <div>
+                                <p>九州の甘口のしょうゆをベースに、九州人の嗜好にあった甘口の「あまかたれ」付。納豆の苦手な方にも食べやすい納豆です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto21") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">パワーキッズ</h4>
+                        <p>株式会社丸美屋</p>
+                        <div class="content">
+                            <img src="/kizzu.jpeg" alt="パワーキッズ">
+                            <div>
+                                <p>くせのないあっさりとした風味と、柔らかな豆が特徴の納豆です。お子様にぴったりのカツオ風味甘口とろみたれ付。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto22") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">国産 くろめ納豆</h4>
+                        <p>製造：原田製油有限会社、販売：二豊フーズ株式会社</p>
+                        <div class="content">
+                            <img src="/kuro.jpeg" alt="国産 くろめ納豆">
+                            <div>
+                                <p>第21回全国納豆鑑評会優秀賞受賞! 昆布の仲間「くろめ」のねばりと納豆でWのねばり</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto24") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">はなまる納豆極小粒</h4>
+                        <p>沖フーズ株式会社</p>
+                        <div class="content">
+                            <img src="/hana.jpeg" alt="はなまる納豆極小粒">
+                            <div>
+                                <p>子供が喜ぶパッケージ</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto25") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br id="300">
+                <div class="home">
+                    <h3>300円〜500円</h3>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">しもにた大粒</h4>
+                        <p>有限会社 下仁田納豆</p>
+                        <div class="content">
+                            <img src="/simo.jpeg" alt="しもにた大粒">
+                            <div>
+                                <p>昭和38年創業以来、群馬県産赤松の経木（きょうぎ）を使用して、国産大豆を炭火発酵にて一つ一つ丁寧に仕上げております。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto8") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">甲斐駒</h4>
+                        <p>株式会社せんだい（店舗名‥納豆工房せんだい屋）</p>
+                        <div class="content">
+                            <img src="/kai.jpeg" alt="甲斐駒">
+                            <div>
+                                <p>職人の手作業でひとつひとつ丁寧に松の経木に包んで仕上げました。豆の甘味、経木の上品な香りを堪能できる大粒・小粒セットです。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto12") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">お伊勢まいり納豆</h4>
+                        <p>奥野食品株式会社（店舗名‥まちの駅たぬみせ納豆工房）</p>
+                        <div class="content">
+                            <img src="/ise.jpeg" alt="お伊勢まいり納豆">
+                            <div>
+                                <p>メリハリのきいたコクと豊かな香りは昔ながらの製造方法を踏襲した大粒納豆の決定版です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto15") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br id="500">
+                <div class="home">
+                    <h3>500円〜1000円</h3>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">豆の文志郎 鹿角納豆</h4>
+                        <p>道南平塚食品株式会社</p>
+                        <div class="content">
+                            <img src="/sika.jpeg" alt="豆の文志郎 鹿角納豆">
+                            <div>
+                                <p>指定農園産の上質な大豆のみを使用し発酵に鹿角霊芝(ろっかくれいし)を活用した独自製法で豊かなコクとまろやかさを実現した文志郎の「最高級」納豆</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto2") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">ナットウジャーキー木桶しょうゆ味</h4>
+                        <p>Shonan Soy Studio Inc.</p>
+                        <div class="content">
+                            <img src="/zyaki.jpeg" alt="ナットウジャーキー木桶しょうゆ味">
+                            <div>
+                                <p>納豆の旨味はそのままに、オイルフリーの低温乾燥・無添加・植物性の設計で実現したフィンガーフードです。さっぱりラガー系ビールや焼酎、日本酒との相性抜群。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto9") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">【特選納豆】NATTO ピスタチオ</h4>
+                        <p>有限会社相沢食産</p>
+                        <div class="content">
+                            <img src="/pis.jpeg" alt="【特選納豆】NATTO ピスタチオ">
+                            <div>
+                                <p>ほんのり甘いコク、ねっとり食感が納豆と相性ぴったり。塩でさっぱりと。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto16") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br id="1000">
+                <div class="home">
+                    <h3>1000円〜2000円</h3>
+            
+                </div>
+                <br id="2000">
+                <div class="home">
+                    <h3>2000円〜3000円</h3>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">富士納豆</h4>
+                        <p>富士納豆製造所</p>
+                        <div class="content">
+                            <img src="/fuji.jpeg" alt="富士納豆">
+                            <div>
+                                <p>富士山麓の水で作った、幻の手作り納豆です。国指定重要文化財星野家謹製、手作り故の数量限定生産品です。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto11") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">なっとう玉</h4>
+                        <p>有限会社ハス商会（店舗名‥四国 阿波 はすや）</p>
+                        <div class="content">
+                            <img src="/natama.jpeg" alt="なっとう玉">
+                            <div>
+                                <p>ポリポリおやつ感覚で食べられる乾燥納豆♪生きた納豆菌で体の中から健康を作るから成長期のお子様を持つ方に大人気。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto20") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br id="none">
+                <div class="home">
+                    <h3>不明</h3>
+                    <div class="item">
+                        <h4><img src="/card2.png" alt="アイコン">わらづつみ納豆</h4>
+                        <p>有限会社野田食品</p>
+                        <div class="content">
+                            <img src="/wara.jpeg" alt="わらづつみ納豆">
+                            <div>
+                                <p>昔ながらの「わらづつみ納豆」をはじめ、ファン続出の「餅」など手作りにこだわった食品製造・卸売業の「野田食品」。長年変わらない手法を守り続け、商品力の高さにリピーターも多い。</p>
+                                <br>
+                                <%= link_to("詳細をみる！", "/index#natto23") %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>
